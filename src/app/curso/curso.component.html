@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+    <div
+      *ngIf="cursos && cursos.length > 0; else noData"
+      class="table-responsive"
+    >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Logo</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Fecha de inicio</th>
+            <th>Precio</th>
+            <th>Rating</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cursos">
+            <td>
+              <img
+                [src]="item.image"
+                class="img-thumbnail"
+                alt="logo"
+                width="50"
+                height="50"
+              />
+            </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.startDate }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.rating }}</td>
+            <td>
+              <button
+                class="btn btn-primary me-1 fas fa-edit"
+                (click)="update(item)"
+              ></button>
+              <button
+                class="btn btn-danger fas fa-trash"
+                (click)="remove(item)"
+              ></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noData>
+      <div class="alert alert-info" role="alert">No hay registros!</div>
+    </ng-template>
+  </div>
+</div>
