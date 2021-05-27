@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Curso } from './curso';
 
@@ -7,7 +7,9 @@ import { Curso } from './curso';
   templateUrl: './curso.component.html',
   styleUrls: ['./curso.component.css'],
 })
-export class CursoComponent implements OnInit {
+export class CursoComponent implements OnInit, AfterViewInit {
+  @ViewChild('filtro', { static: false })
+  public filtro!: ElementRef;
   public titulo: string = 'Cursos';
   public cursos: Curso[] = [
     {
@@ -43,6 +45,9 @@ export class CursoComponent implements OnInit {
     setTimeout(() => {
       // this.removeAll();
     }, 6000);
+  }
+  ngAfterViewInit(): void {
+    this.filtro.nativeElement.value = "Angular desde cero";
   }
 
   ngOnInit(): void {}
