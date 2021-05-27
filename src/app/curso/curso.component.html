@@ -34,14 +34,12 @@
             <td>{{ item.price }}</td>
             <td>{{ item.rating }}</td>
             <td>
-              <button
-                class="btn btn-primary me-1 fas fa-edit"
-                (click)="update(item)"
-              ></button>
-              <button
-                class="btn btn-danger fas fa-trash"
-                (click)="remove(item)"
-              ></button>
+             <app-actions-button 
+                [curso]="item"
+                (delete)="onDelete($event)"
+                (edit)="onEdit($event)"
+              >
+            </app-actions-button>
             </td>
           </tr>
         </tbody>

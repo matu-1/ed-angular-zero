@@ -1,53 +1,63 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Curso } from './curso';
 
 @Component({
   selector: 'app-curso',
   templateUrl: './curso.component.html',
-  styleUrls: ['./curso.component.css']
+  styleUrls: ['./curso.component.css'],
 })
 export class CursoComponent implements OnInit {
-  public titulo: string = "Cursos";
+  public titulo: string = 'Cursos';
   public cursos: Curso[] = [
     {
       id: 1,
-      name: "Angular",
-      description: "Angular desde cero",
-      startDate: "15 septiembre, 2021",
+      name: 'Angular',
+      description: 'Angular desde cero',
+      startDate: '15 septiembre, 2021',
       price: 15.5,
       rating: 8.2,
-      image: "https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png",
+      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
     },
-     {
-      id: 1,
-      name: "Angular",
-      description: "Angular desde cero",
-      startDate: "15 septiembre, 2021",
+    {
+      id: 2,
+      name: 'PHP',
+      description: 'PHP desde cero',
+      startDate: '15 septiembre, 2021',
       price: 15.5,
       rating: 8.2,
-      image: "https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png",
+      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
+    },
+    {
+      id: 3,
+      name: 'Java',
+      description: 'Java desde cero',
+      startDate: '15 septiembre, 2021',
+      price: 15.5,
+      rating: 8.2,
+      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
     },
   ];
 
-  constructor() { 
+  constructor(private router: Router) {
     setTimeout(() => {
-      this.removeAll();
+      // this.removeAll();
     }, 6000);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  update(curso: Curso): void {
-    console.log("Update", curso);
-  }
-
-  remove(curso: Curso): void {
-    console.log("Delete", curso);
-  }
-
-  removeAll(){
+  removeAll() {
     this.cursos = [];
   }
 
+  onDelete(e: Curso) {
+    console.log('onDelete', e);
+    this.cursos = this.cursos.filter( curso => curso != e);
+  }
+
+  onEdit(e: Curso) {
+    console.log('onEdit', e);
+    this.router.navigate([`curso/edit/${e.id}`])
+  }
 }

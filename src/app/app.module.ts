@@ -7,6 +7,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CursoComponent } from './curso/curso.component';
+import { ActionsButtonComponent } from './actions-button/actions-button.component';
+import { EditComponent } from './curso/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { CursoComponent } from './curso/curso.component';
     NavbarComponent,
     SidenavComponent,
     DashboardComponent,
-    CursoComponent
+    CursoComponent,
+    ActionsButtonComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
