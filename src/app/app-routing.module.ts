@@ -4,12 +4,13 @@ import { CursoComponent } from './curso/curso.component';
 import { EditComponent } from './curso/edit/edit.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'curso', pathMatch: 'full' },
   { path: 'curso', component: CursoComponent },
-  { path: 'curso/edit/:id', component: EditComponent }
+  { path: 'curso/edit/:id', component: EditComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,6 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Curso } from './curso';
+import { CursoService } from './curso.service';
 
 @Component({
   selector: 'app-curso',
@@ -11,46 +18,31 @@ export class CursoComponent implements OnInit, AfterViewInit {
   @ViewChild('filtro', { static: false })
   public filtro!: ElementRef;
   public titulo: string = 'Cursos';
-  public cursos: Curso[] = [
-    {
-      id: 1,
-      name: 'Angular',
-      description: 'Angular desde cero',
-      startDate: '15 septiembre, 2021',
-      price: 15.5,
-      rating: 8.2,
-      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
-    },
-    {
-      id: 2,
-      name: 'PHP',
-      description: 'PHP desde cero',
-      startDate: '15 septiembre, 2021',
-      price: 15.5,
-      rating: 8.2,
-      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
-    },
-    {
-      id: 3,
-      name: 'Java',
-      description: 'Java desde cero',
-      startDate: '15 septiembre, 2021',
-      price: 15.5,
-      rating: 8.2,
-      image: 'https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png',
-    },
-  ];
+  public cursos!: Curso[];
+  public _textFilter: string = 'Angular';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cursoServie: CursoService) {
     setTimeout(() => {
       // this.removeAll();
     }, 6000);
   }
-  ngAfterViewInit(): void {
-    this.filtro.nativeElement.value = "Angular desde cero";
+
+  get textFilter() {
+    return this._textFilter;
   }
 
-  ngOnInit(): void {}
+  set textFilter(value: string) {
+    this._textFilter = value;
+    this.cursos = this.loadFilter(value, this.cursoServie.getAll());
+  }
+
+  ngAfterViewInit(): void {
+    this.filtro.nativeElement.value = 'Angular desde cero';
+  }
+
+  ngOnInit(): void {
+    this.cursos = this.loadFilter(this._textFilter, this.cursoServie.getAll());
+  }
 
   removeAll() {
     this.cursos = [];
@@ -58,11 +50,17 @@ export class CursoComponent implements OnInit, AfterViewInit {
 
   onDelete(e: Curso) {
     console.log('onDelete', e);
-    this.cursos = this.cursos.filter( curso => curso != e);
+    this.cursos = this.cursos.filter((curso) => curso != e);
   }
 
   onEdit(e: Curso) {
     console.log('onEdit', e);
-    this.router.navigate([`curso/edit/${e.id}`])
+    this.router.navigate([`curso/edit/${e.id}`]);
+  }
+
+  loadFilter(value: string, cursos: Curso[]): Curso[] {
+    return cursos.filter((item) =>
+      item.name?.toUpperCase().includes(value.toUpperCase())
+    );
   }
 }
