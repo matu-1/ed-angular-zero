@@ -6,6 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Curso } from './curso';
 import { CursoService } from './curso.service';
 
@@ -20,6 +22,8 @@ export class CursoComponent implements OnInit, AfterViewInit {
   public titulo: string = 'Cursos';
   public cursos!: Curso[];
   public _textFilter: string = 'Angular';
+  error!: string;
+  cursosCopy!: Curso[];
 
   constructor(private router: Router, private cursoServie: CursoService) {
     setTimeout(() => {
@@ -33,7 +37,7 @@ export class CursoComponent implements OnInit, AfterViewInit {
 
   set textFilter(value: string) {
     this._textFilter = value;
-    this.cursos = this.loadFilter(value, this.cursoServie.getAll());
+    this.cursos = this.loadFilter(value, this.cursosCopy);
   }
 
   ngAfterViewInit(): void {
@@ -41,7 +45,21 @@ export class CursoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.cursos = this.loadFilter(this._textFilter, this.cursoServie.getAll());
+   this.getAll();
+  }
+
+  getAll(){
+    this.cursoServie.getAll()
+    .subscribe(
+      cursos => {
+        this.cursosCopy = cursos;
+        this.cursos = this.loadFilter(this._textFilter, cursos);
+      },
+      error => {
+        console.error("error", error);
+        this.error = error.message
+      }
+    )
   }
 
   removeAll() {
@@ -59,7 +77,7 @@ export class CursoComponent implements OnInit, AfterViewInit {
   }
 
   loadFilter(value: string, cursos: Curso[]): Curso[] {
-    return cursos.filter((item) =>
+    return cursos?.filter((item) =>
       item.name?.toUpperCase().includes(value.toUpperCase())
     );
   }

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Angular",
+    "description": "Angular desde cero",
+    "startDate": "15 septiembre, 2021",
+    "price": 15.5,
+    "rating": 8.2,
+    "image": "https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png"
+  },
+  {
+    "id": 2,
+    "name": "PHP",
+    "description": "PHP desde cero",
+    "startDate": "15 septiembre, 2021",
+    "price": 15.5,
+    "rating": 8.2,
+    "image": "https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png"
+  },
+  {
+    "id": 3,
+    "name": "Java",
+    "description": "Java desde cero",
+    "startDate": "15 septiembre, 2021",
+    "price": 15.5,
+    "rating": 8.2,
+    "image": "https://cdn.iconscout.com/icon/free/png-256/php-27-226042.png"
+  }
+]
