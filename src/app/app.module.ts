@@ -10,7 +10,8 @@ import { CursoComponent } from './curso/curso.component';
 import { ActionsButtonComponent } from './actions-button/actions-button.component';
 import { EditComponent } from './curso/edit/edit.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { CreateComponent } from './curso/create/create.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from '@angular/common/http'
     DashboardComponent,
     CursoComponent,
     ActionsButtonComponent,
-    EditComponent
+    EditComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,

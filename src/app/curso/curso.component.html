@@ -7,8 +7,11 @@
   <div class="card-body">
     <div class="row">
       <label for="" class="col-sm-2 col-form-label">Filtro</label>
-      <div class="col-sm-10">
+      <div class="col-sm-8">
         <input #filtro type="text" class="form-control" [(ngModel)]="textFilter">
+      </div>
+      <div class="col-sm-2">
+         <button routerLink="/curso/create" class="btn btn-primary">CREAR</button>
       </div>
     </div>
   </div>
