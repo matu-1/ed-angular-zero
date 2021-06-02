@@ -9,9 +9,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CursoComponent } from './curso/curso.component';
 import { ActionsButtonComponent } from './actions-button/actions-button.component';
 import { EditComponent } from './curso/edit/edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { CreateComponent } from './curso/create/create.component'
+import { CreateComponent } from './curso/create/create.component';
+import { CreateReactiveComponent } from './curso/create-reactive/create-reactive.component'
 
 @NgModule({
   declarations: [
@@ -22,13 +23,15 @@ import { CreateComponent } from './curso/create/create.component'
     CursoComponent,
     ActionsButtonComponent,
     EditComponent,
-    CreateComponent
+    CreateComponent,
+    CreateReactiveComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
